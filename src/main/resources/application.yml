@@ -1,0 +1,21 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: stock_etl_tool
+
+  config:
+    import: classpath:logging.yml
+
+  datasource:
+    url: jdbc:postgresql://localhost:9091/stock_etl_tool
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+    hibernate:
+      ddl-auto: update
