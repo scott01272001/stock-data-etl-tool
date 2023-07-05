@@ -2,8 +2,10 @@ CREATE SEQUENCE schedule_task_seq INCREMENT by 1;
 CREATE TABLE schedule_task
 (
     schedule_task_id INTEGER PRIMARY KEY default nextval('schedule_task_seq'),
-    task_name        VARCHAR(255),
-    task_status      VARCHAR(255),
+    name        VARCHAR(255),
+    status      VARCHAR(255),
+    lifecycle        jsonb,
+    metadata         jsonb,
     create_datetime  TIMESTAMP WITH TIME ZONE,
     update_datetime  TIMESTAMP WITH TIME ZONE
 );
@@ -29,8 +31,18 @@ CREATE TABLE stock
 );
 
 
-INSERT INTO schedule_task (task_name, task_status, create_datetime, update_datetime)
-VALUES ('task-1', 'Running', CURRENT_TIMESTAMP(0), CURRENT_TIMESTAMP(0));
-
-INSERT INTO schedule_task (task_name, task_status, create_datetime, update_datetime)
-VALUES ('task-2', 'Stop', CURRENT_TIMESTAMP(0), CURRENT_TIMESTAMP(0));
+INSERT INTO schedule_task (name, status, lifecycle, metadata, create_datetime, update_datetime)
+VALUES ('task-1', 'Running', '{
+  "lifecycle": "Once",
+  "launchTime": {
+    "hour": 12,
+    "minute": 12
+  }
+}'::jsonb, '{
+  "type": "com.scott.stock.stockdataetltool.model.vo.StockPriceTaskMetadata",
+  "targetType": "All",
+  "retrieveDate": {
+    "day": 25,
+    "month": 1
+  }
+}'::jsonb, CURRENT_TIMESTAMP(0), CURRENT_TIMESTAMP(0));

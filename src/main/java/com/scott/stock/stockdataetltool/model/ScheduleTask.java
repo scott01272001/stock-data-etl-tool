@@ -1,5 +1,6 @@
 package com.scott.stock.stockdataetltool.model;
 
+import com.scott.stock.stockdataetltool.model.vo.TaskLifecycle;
 import com.scott.stock.stockdataetltool.model.vo.TaskMetadata;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,6 +13,8 @@ import jakarta.persistence.SequenceGenerator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Getter
 @Setter
@@ -25,19 +28,26 @@ public class ScheduleTask extends VersionedObject {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "schedule_task_id_seq")
   private Long scheduleTaskId;
 
-  @Column(name = "task_name")
-  private String taskName;
+  @Column(name = "name")
+  private String name;
 
-  @Column(name = "task_status")
+  @Column(name = "status")
   @Enumerated(EnumType.STRING)
-  private TaskStatus taskStatus;
+  private TaskStatus status;
 
-  @Column(name = "task_metadata")
+  @Column(name = "lifecycle", columnDefinition = "jsonb")
+  @JdbcTypeCode(SqlTypes.JSON)
+  private TaskLifecycle lifecycle;
+
+  @Column(name = "metadata", columnDefinition = "jsonb")
+  @JdbcTypeCode(SqlTypes.JSON)
   private TaskMetadata taskMetadata;
 
-  public ScheduleTask(String taskName, TaskStatus taskStatus) {
-    this.taskName = taskName;
-    this.taskStatus = taskStatus;
+  public ScheduleTask(String name, TaskStatus status, TaskLifecycle lifecycle, TaskMetadata taskMetadata) {
+    this.name = name;
+    this.status = status;
+    this.lifecycle = lifecycle;
+    this.taskMetadata = taskMetadata;
   }
 
   public enum TaskStatus {

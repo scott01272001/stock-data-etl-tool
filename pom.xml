@@ -61,6 +61,28 @@
       <version>2.14.2</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/com.vladmihalcea/hibernate-types-60 -->
+    <dependency>
+      <artifactId>hibernate-types-60</artifactId>
+      <groupId>com.vladmihalcea</groupId>
+      <version>2.21.1</version>
+    </dependency>
+
+    <!-- Querydsl -->
+    <dependency>
+      <artifactId>querydsl-apt</artifactId>
+      <classifier>jakarta</classifier>
+      <groupId>com.querydsl</groupId>
+      <scope>provided</scope>
+      <version>5.0.0</version>
+    </dependency>
+    <dependency>
+      <artifactId>querydsl-jpa</artifactId>
+      <classifier>jakarta</classifier>
+      <groupId>com.querydsl</groupId>
+      <version>5.0.0</version>
+    </dependency>
+
     <dependency>
       <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
