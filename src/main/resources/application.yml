@@ -18,4 +18,13 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     database: postgresql
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
+
+  flyway:
+    locations: classpath:db/migration
+    user: user
+    password: password
+    url: jdbc:postgresql://localhost:9091/stock_etl_tool
+    enabled: true
+
+
