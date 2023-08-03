@@ -19,6 +19,12 @@ spring:
     database: postgresql
     hibernate:
       ddl-auto: none
+    show-sql: false
+
+    properties:
+      hibernate:
+        format_sql: true
+
 
   flyway:
     locations: classpath:db/migration
