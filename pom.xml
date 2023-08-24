@@ -22,7 +22,6 @@
   </build>
 
   <dependencies>
-
     <dependency>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
       <groupId>org.springframework.boot</groupId>
@@ -85,19 +84,10 @@
       <version>0.11.5</version>
     </dependency>
 
-    <!-- Querydsl -->
     <dependency>
-      <artifactId>querydsl-apt</artifactId>
-      <classifier>jakarta</classifier>
-      <groupId>com.querydsl</groupId>
-      <scope>provided</scope>
-      <version>5.0.0</version>
-    </dependency>
-    <dependency>
-      <artifactId>querydsl-jpa</artifactId>
-      <classifier>jakarta</classifier>
-      <groupId>com.querydsl</groupId>
-      <version>5.0.0</version>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <groupId>org.springdoc</groupId>
+      <version>2.2.0</version>
     </dependency>
 
     <dependency>

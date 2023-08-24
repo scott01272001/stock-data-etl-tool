@@ -11,6 +11,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,47 +23,50 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @RequiredArgsConstructor
 @Log4j2
 public class GlobalExceptionHandler {
-  private final ObjectMapper objectMapper;
 
+    private final ObjectMapper objectMapper;
 
-  @ExceptionHandler(DuplicatedObjectException.class)
-  public ResponseEntity<String> handleDuplicatedObjectException(DuplicatedObjectException ex)
-      throws JsonProcessingException {
-    return ResponseEntity.status(HttpStatus.NOT_FOUND) //
-        .contentType(MediaType.APPLICATION_JSON) //
-        .body(objectMapper.writeValueAsString(new ErrorBody(ex.getMessage())));
-  }
+    @ExceptionHandler(value = {BadCredentialsException.class, UsernameNotFoundException.class})
+    public ResponseEntity<String> handleLoginFailException(Exception ex)
+        throws JsonProcessingException {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED) //
+            .contentType(MediaType.APPLICATION_JSON) //
+            .body(objectMapper.writeValueAsString(new ErrorBody(ex.getMessage())));
+    }
 
-  @ExceptionHandler(ObjectNotFoundException.class)
-  public ResponseEntity<String> handleObjectNotFoundException(ObjectNotFoundException ex)
-      throws JsonProcessingException {
-    return ResponseEntity.status(HttpStatus.NOT_FOUND) //
-        .contentType(MediaType.APPLICATION_JSON) //
-        .body(objectMapper.writeValueAsString(new ErrorBody(ex.getMessage())));
-  }
+    @ExceptionHandler(value = {ObjectNotFoundException.class})
+    public ResponseEntity<String> handleObjectNotFoundException(Exception ex)
+        throws JsonProcessingException {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND) //
+            .contentType(MediaType.APPLICATION_JSON) //
+            .body(objectMapper.writeValueAsString(new ErrorBody(ex.getMessage())));
+    }
 
-  @ExceptionHandler(MethodArgumentNotValidException.class)
-  public ResponseEntity<String> handleMethodArgumentNotValidException(
-      MethodArgumentNotValidException ex) throws JsonProcessingException {
-    return ResponseEntity.status(HttpStatus.BAD_REQUEST) //
-        .contentType(MediaType.APPLICATION_JSON) //
-        .body(objectMapper.writeValueAsString(new ErrorBody(ex.getBindingResult().getFieldError().getDefaultMessage())));
-  }
+    @ExceptionHandler(value = {MethodArgumentNotValidException.class,
+        DuplicatedObjectException.class})
+    public ResponseEntity<String> handleMethodArgumentNotValidException(
+        MethodArgumentNotValidException ex) throws JsonProcessingException {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST) //
+            .contentType(MediaType.APPLICATION_JSON) //
+            .body(objectMapper.writeValueAsString(
+                new ErrorBody(ex.getBindingResult().getFieldError().getDefaultMessage())));
+    }
 
-  @ExceptionHandler(Exception.class)
-  public ResponseEntity<String> handleException(Exception ex) throws JsonProcessingException {
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleException(Exception ex) throws JsonProcessingException {
 
-    log.error(ex, ex);
+        log.error(ex, ex);
 
-    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR) //
-        .body(objectMapper.writeValueAsString(new ErrorBody(ex.getMessage())));
-  }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR) //
+            .body(objectMapper.writeValueAsString(new ErrorBody(ex.getMessage())));
+    }
 
-  @AllArgsConstructor
-  @Data
-  public static class ErrorBody {
-    private final String message;
-  }
+    @AllArgsConstructor
+    @Data
+    public static class ErrorBody {
+
+        private final String message;
+    }
 
 }
 

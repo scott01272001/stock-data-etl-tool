@@ -32,7 +32,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private static final String[] PREMITS_ENDPOINT = {"/api/token"};
+    private static final String[] PREMITS_ENDPOINT = {
+        "/api/token",
+        "/swagger-ui/**",
+        "/v3/api-docs/**",
+        "/swagger-ui.html"
+    };
     private final AccountRepository accountRepository;
     private final JwtTokenService jwtTokenService;
     private final ObjectMapper objectMapper;

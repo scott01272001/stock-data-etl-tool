@@ -25,7 +25,6 @@ spring:
       hibernate:
         format_sql: true
 
-
   flyway:
     locations: classpath:db/migration
     user: user

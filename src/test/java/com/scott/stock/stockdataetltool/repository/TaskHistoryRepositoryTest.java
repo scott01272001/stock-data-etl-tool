@@ -1,9 +1,10 @@
 package com.scott.stock.stockdataetltool.repository;
 
+import com.scott.stock.stockdataetltool.StockDataEtlToolApplicationTests;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class TaskHistoryRepositoryTest extends ScheduleTaskRepositoryTest {
+public class TaskHistoryRepositoryTest extends StockDataEtlToolApplicationTests {
 
     @Autowired
     private TaskHistoryRepository taskHistoryRepository;
@@ -12,7 +13,7 @@ public class TaskHistoryRepositoryTest extends ScheduleTaskRepositoryTest {
 
     @Test
     public void test() {
-
+        System.out.println("----test----");
     }
 
 }
