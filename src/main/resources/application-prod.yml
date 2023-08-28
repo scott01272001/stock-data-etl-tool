@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/stock-etl-tool
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/stock_etl_tool
     username: ${POSTGRES_USERNAME}
     password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
@@ -12,7 +12,7 @@ spring:
     locations: classpath:db/migration
     user: ${POSTGRES_USERNAME}
     password: ${POSTGRES_PASSWORD}
-    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/stock-etl-tool
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/stock_etl_tool
     enabled: true
 
 
