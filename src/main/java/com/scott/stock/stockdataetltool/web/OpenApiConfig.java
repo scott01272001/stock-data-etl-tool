@@ -15,7 +15,8 @@ import io.swagger.v3.oas.annotations.servers.Server;
         description = "OpenAPI documentation for etl tool"
     ),
     servers = {
-        @Server(description = "Local ENV", url = "http://localhost:9090")
+        @Server(description = "Dev ENV", url = "http://localhost:9092"),
+        @Server(description = "Production ENV", url = "https://etltool.zeabur.app")
     },
     security = {@SecurityRequirement(name = "bearer auth")}
 )
