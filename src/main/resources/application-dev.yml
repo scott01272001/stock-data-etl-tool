@@ -1,0 +1,16 @@
+server:
+  port: 9092
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:9091/stock_etl_tool
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+  flyway:
+    locations: classpath:db/migration
+    user: user
+    password: password
+    url: jdbc:postgresql://localhost:9091/stock_etl_tool
+    enabled: true

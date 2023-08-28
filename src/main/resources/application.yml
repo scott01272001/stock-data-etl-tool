@@ -1,18 +1,13 @@
-server:
-  port: 9090
 
 spring:
+  profiles:
+    active: @activatedProperties@
+
   application:
     name: stock_etl_tool
 
   config:
     import: classpath:logging.yml
-
-  datasource:
-    url: jdbc:postgresql://localhost:9091/stock_etl_tool
-    username: user
-    password: password
-    driver-class-name: org.postgresql.Driver
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -24,12 +19,4 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
-  flyway:
-    locations: classpath:db/migration
-    user: user
-    password: password
-    url: jdbc:postgresql://localhost:9091/stock_etl_tool
-    enabled: true
-
 
