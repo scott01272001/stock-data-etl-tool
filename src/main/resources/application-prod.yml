@@ -3,16 +3,16 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://zeabur-gcp-asia-east1-1.clusters.zeabur.com:31365/stock_etl_tool
-    username: root
-    password: 82Tv94G6u3Cy
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/stock-etl-tool
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   flyway:
     locations: classpath:db/migration
-    user: root
-    password: 82Tv94G6u3Cy
-    url: jdbc:postgresql://zeabur-gcp-asia-east1-1.clusters.zeabur.com:31365/stock_etl_tool
+    user: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/stock-etl-tool
     enabled: true
 
 
