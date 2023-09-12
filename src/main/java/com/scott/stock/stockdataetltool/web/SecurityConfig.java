@@ -5,6 +5,7 @@ import com.scott.stock.stockdataetltool.model.Account;
 import com.scott.stock.stockdataetltool.repository.AccountRepository;
 import com.scott.stock.stockdataetltool.service.JwtTokenService;
 import com.scott.stock.stockdataetltool.web.filter.JwtAuthenticationFilter;
+import com.scott.stock.stockdataetltool.web.filter.RequestLoggingFilter;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -56,6 +57,8 @@ public class SecurityConfig {
         http.addFilterBefore(
             new JwtAuthenticationFilter(jwtTokenService, userDetailsService(), objectMapper),
             UsernamePasswordAuthenticationFilter.class);
+
+        http.addFilterBefore(new RequestLoggingFilter(), JwtAuthenticationFilter.class);
 
         return http.build();
     }
