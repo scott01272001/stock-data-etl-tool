@@ -20,13 +20,12 @@ public class RequestLoggingFilter extends AbstractRequestLoggingFilter {
 
     @Override
     protected void beforeRequest(HttpServletRequest request, String message) {
-        log.info("[{}] {}", request.getMethod(),
+        log.debug("[{}] {}", request.getMethod(),
             URLDecoder.decode(message, StandardCharsets.UTF_8));
     }
 
     @Override
     protected void afterRequest(HttpServletRequest request, String message) {
-//        log.info("[{}] {}:", request.getMethod(), request.getRequestURI());
-//        log.info("{}", message);
     }
+
 }
