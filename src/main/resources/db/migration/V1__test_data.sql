@@ -38,8 +38,10 @@ ALTER SEQUENCE task_history_seq OWNED BY task_history.task_history_id;
 
 CREATE TABLE stock
 (
-    stock_id INTEGER PRIMARY KEY,
-    name     VARCHAR(255)
+    stock_id VARCHAR PRIMARY KEY,
+    name     VARCHAR(255),
+    type     VARCHAR(255),
+    industry_category   VARCHAR(255)
 );
 
 INSERT INTO account (email, password, create_datetime, update_datetime)

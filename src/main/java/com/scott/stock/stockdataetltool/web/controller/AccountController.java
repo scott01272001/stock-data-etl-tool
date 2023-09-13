@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Account")
 @RestController
-@RequestMapping(value = "/api/account")
+@RequestMapping(value = "/api/accounts")
 @Log4j2
 @RequiredArgsConstructor
 public class AccountController {

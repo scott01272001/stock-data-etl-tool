@@ -17,9 +17,15 @@ public class Stock extends SerializeObject {
 
   @Id
   @Column(name = "stock_id")
-  private Long stockId;
+  private String stockId;
 
   @Column
   private String name;
+
+  @Column
+  private String type;
+
+  @Column(name = "industry_category")
+  private String industryCategory;
 
 }
