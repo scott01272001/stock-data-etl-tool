@@ -1,31 +1,29 @@
 package com.scott.stock.stockdataetltool.job;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.scott.stock.stockdataetltool.model.Stock;
 import com.scott.stock.stockdataetltool.repository.StockRepository;
+import java.net.URI;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.net.URI;
-import java.util.HashSet;
-import java.util.Set;
-
 @Log4j2
 @RequiredArgsConstructor
 public class CollectStockListTask implements Job {
+
     private static final String TOKEN = "token";
     private static final String DATASET = "dataset";
     private static final String API_ENDPOINT = "https://api.finmindtrade.com/api/v4/data";
@@ -69,6 +67,7 @@ public class CollectStockListTask implements Job {
 
             return Flux.fromIterable(stockSet);
         }).map((stock) -> {
+            // TODO: check record unique constraint
             stockRepository.save(stock);
             return Flux.empty();
         }).subscribe();
