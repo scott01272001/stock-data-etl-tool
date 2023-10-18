@@ -4,39 +4,23 @@ import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Version;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-
+@Getter
+@Setter
 @MappedSuperclass
 public class VersionEntity extends SerializeObject {
 
-    @Column(name = "create_datetime", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    @Column(name = "create_datetime", columnDefinition = "timestamp with time zone default now()")
     @CreationTimestamp
-    protected OffsetDateTime createDatetime;
+    protected LocalDateTime createDatetime;
 
-    @Column(name = "update_datetime", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    @Column(name = "update_datetime", columnDefinition = "timestamp with time zone default now()")
     @UpdateTimestamp
     @Version
-    protected OffsetDateTime updateDatetime;
-
-
-    public LocalDateTime getCreateDatetime() {
-        return createDatetime.atZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
-    }
-
-    public void setCreateDatetime(LocalDateTime createDatetime) {
-        this.createDatetime = createDatetime.atZone(ZoneId.systemDefault()).toOffsetDateTime();
-    }
-
-    public LocalDateTime getUpdateDatetime() {
-        return updateDatetime.atZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
-    }
-
-    public void setUpdateDatetime(LocalDateTime updateDatetime) {
-        this.updateDatetime = updateDatetime.atZone(ZoneId.systemDefault()).toOffsetDateTime();
-    }
+    protected LocalDateTime updateDatetime;
 
 }

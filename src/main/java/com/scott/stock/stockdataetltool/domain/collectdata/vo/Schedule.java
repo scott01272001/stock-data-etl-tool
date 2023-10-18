@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 public class Schedule {
 
     private boolean runRepeat;
+    private boolean startNow;
     private ZonedDateTime startAt;
     private long repeatIntervalInMinute;
+
 }

@@ -1,5 +1,6 @@
 package com.scott.stock.stockdataetltool.domain.collectdata.entity;
 
+import com.scott.stock.stockdataetltool.domain.VersionEntity;
 import com.scott.stock.stockdataetltool.domain.collectdata.vo.Schedule;
 import com.scott.stock.stockdataetltool.domain.collectdata.vo.TaskConfig;
 import jakarta.persistence.Column;
@@ -15,33 +16,31 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-@ToString
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity(name = "task")
-public class Task {
+public class Task extends VersionEntity {
 
     @Id
-    @Column
-    @SequenceGenerator(name = "task_id_seq", sequenceName = "task_seq", initialValue = 1, allocationSize = 1)
+    @Column(nullable = false, unique = true)
+    @SequenceGenerator(name = "task_id_seq", sequenceName = "task_id_seq", initialValue = 1, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_id_seq")
     private long id;
 
-    @Column
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TaskType type;
 
-    @Column
+    @Column(nullable = false)
     private boolean activate;
 
-    @Column
+    @Column(nullable = false)
     @JdbcTypeCode(SqlTypes.JSON)
     private Schedule schedule;
 

@@ -52,19 +52,19 @@
     </dependency>
 
     <!-- Querydsl -->
-<!--    <dependency>-->
-<!--      <artifactId>querydsl-apt</artifactId>-->
-<!--      <classifier>jakarta</classifier>-->
-<!--      <groupId>com.querydsl</groupId>-->
-<!--      <scope>provided</scope>-->
-<!--      <version>5.0.0</version>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <artifactId>querydsl-jpa</artifactId>-->
-<!--      <classifier>jakarta</classifier>-->
-<!--      <groupId>com.querydsl</groupId>-->
-<!--      <version>5.0.0</version>-->
-<!--    </dependency>-->
+    <dependency>
+      <artifactId>querydsl-apt</artifactId>
+      <classifier>jakarta</classifier>
+      <groupId>com.querydsl</groupId>
+      <scope>provided</scope>
+      <version>5.0.0</version>
+    </dependency>
+    <dependency>
+      <artifactId>querydsl-jpa</artifactId>
+      <classifier>jakarta</classifier>
+      <groupId>com.querydsl</groupId>
+      <version>5.0.0</version>
+    </dependency>
 
 
     <dependency>
